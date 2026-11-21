@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:;"
+    />
+    <title>Sticky Todo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header id="titlebar">
+      <span id="tally">&nbsp;</span>
+      <div class="tools">
+        <button id="btn-pin" class="tool" title="Keep on top" aria-pressed="true">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M9.6 1.4 14.6 6.4 12.8 7.1 12.1 9.9 6.1 3.9 8.9 3.2z" />
+            <path d="M6.1 9.9 1.8 14.2" class="stroke" />
+            <path d="M6.5 4.3 11.7 9.5" class="stroke" />
+          </svg>
+        </button>
+        <button id="btn-cats" class="tool" title="Edit categories" aria-expanded="false">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path
+              d="M2 2.6h5.2l6.8 6.8-4.6 4.6L2.6 7.2z"
+              class="stroke"
+              fill="none"
+            />
+            <circle cx="5.1" cy="5.1" r="1.15" />
+          </svg>
+        </button>
+        <button id="btn-min" class="tool" title="Minimize">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M3 8.4h10" class="stroke" />
+          </svg>
+        </button>
+        <button id="btn-close" class="tool" title="Close">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M4 4l8 8M12 4l-8 8" class="stroke" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section id="cats-panel" hidden>
+      <ul id="cats-list"></ul>
+      <form id="cat-form">
+        <input
+          id="cat-name"
+          type="text"
+          maxlength="24"
+          placeholder="Add a category"
+          autocomplete="off"
+        />
+        <button type="submit" class="ghost">Add</button>
+      </form>
+    </section>
+
+    <form id="capture">
+      <input
+        id="what"
+        type="text"
+        maxlength="200"
+        placeholder="What needs doing?"
+        autocomplete="off"
+      />
+      <div class="capture-row">
+        <input
+          id="when"
+          type="text"
+          maxlength="32"
+          placeholder="fri 5pm, 10/14 eod"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <select id="which" aria-label="Category"></select>
+        <button type="submit" id="btn-add" title="Add task">
+          <svg viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 3.4v9.2M3.4 8h9.2" class="stroke" />
+          </svg>
+        </button>
+      </div>
+      <p id="when-echo" aria-live="polite"></p>
+    </form>
+
+    <nav id="sortbar">
+      <button data-sort="due" class="sort">Due date</button>
+      <button data-sort="cat" class="sort">Category</button>
+    </nav>
+
+    <main id="list" tabindex="-1"></main>
+
+    <footer>
+      <button id="btn-clear" class="ghost">Clear finished</button>
+      <button id="btn-ics" class="ghost">Export .ics</button>
+    </footer>
+
+    <script src="dates.js"></script>
+    <script src="renderer.js"></script>
+  </body>
+</html>
